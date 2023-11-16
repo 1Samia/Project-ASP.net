@@ -217,10 +217,11 @@
 											<tr class="text-center p-2">
 												<th style="font-family:Cairo"> رقم الفندق</th>
 												<th style="font-family:Cairo"> رقم الفرفة</th>
-												<th style="font-family:Cairo">نوع الغرفة </th>
 												<th style="font-family:Cairo"> مزايا الغرفة</th>
 												<th style="font-family:Cairo"> الطعام </th>
-												<th style="font-family:Cairo"> صورة </th>
+												<th style="font-family:Cairo"> 1صورة </th>
+												<th style="font-family:Cairo"> 2صورة </th>
+												<th style="font-family:Cairo"> 3صورة </th>
 												<th style="font-family:Cairo" colspan="2">اجراء </th>
 											</tr>
 										</thead>
@@ -233,8 +234,10 @@
 													<td>@item.Futures</td>
 													<td>@item.Food</td>
 													<td>@item.Image1</td>
+													<td>@item.Image2</td>
+													<td>@item.Image3</td>
 													<td><a asp-action="DeleteRoomDetails" asp-route-id="@item.Id"><i class="fa fa-trash text-danger"></i></a></td>
-													<td><a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit text-success"></i></a></td>
+													<td><a asp-action="RoomDetailsEdit" asp-route-id="@item.Id"><i class="fa fa-edit text-success"></i></a></td>
 												</tr>
 											}
 

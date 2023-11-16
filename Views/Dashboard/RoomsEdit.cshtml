@@ -1,0 +1,65 @@
+﻿@model Rooms
+@{
+	var hotelName = ViewBag.HotelName;
+}
+<div class="container" dir="rtl">
+    <div class="alert alert-success text-center "><h1>تعديل بيانات الغرفة </h1></div>
+    <form asp-controller="Dashboard" asp-action="RoomsUpdate" method="post">
+        <input type="hidden" asp-for="@Model.Id" />
+		<div class="row">
+
+				<div class="col">
+				<label for="Name" class="p-2">اختر الفندق</label>
+				<select class="form-control form-control-sm" name="IdHotel">
+					<option value="0"></option>
+					@if (ViewBag.hotel != null && ViewBag.hotel is IEnumerable<Hotel>)
+					{
+						@foreach (var item in ViewBag.hotel as IEnumerable<Hotel>)
+						{
+							<option value="@item.Id">@item.Name</option>
+						}
+					}
+				</select>
+
+
+				</div>
+		
+
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="Address" class="p-2"> نوع الغرفة </label>
+					<input type="text" id="Address" name="Type" class="form-control form-control-sm" required />
+
+
+				</div>
+				<div class="col-sm-6">
+					<label for="Address" class="p-2">  سعر الغرفة</label>
+					<input type="text" id="City" name="Price" class="form-control form-control-sm" required />
+
+
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col">
+					<label for="Image" class="p-2"> الصورة </label>
+					<input type="text" id="Image" name="Images" class="form-control form-control-sm" required />
+				</div>
+
+			</div>
+
+			<div class="row mt-3">
+				<div class="col text-center">
+
+					<button class="btn btn-success" type="submit">حفظ</button>
+
+
+				</div>
+
+			</div>
+
+		</div>
+    </form>
+
+</div>

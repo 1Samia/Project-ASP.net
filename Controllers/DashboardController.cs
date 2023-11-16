@@ -111,24 +111,26 @@ namespace Hotels.Controllers
 			return View(hotel);
 			
 		}
+		
 		public IActionResult Rooms()
 		{
-
+			
 			var hotel = _context.hotel.ToList();
 			ViewBag.hotel = hotel;
 			//ViewBag.currentuser = Request.Cookies["UserName"];
 			ViewBag.currentuser = HttpContext.Session.GetString("UserName");
 			var rooms = _context.rooms.ToList();
-			return View(rooms);
+
+            return View(rooms);
 
 		}
-		[HttpPost]
-		public IActionResult Rooms(int hotel)
+		
+	/*	public IActionResult Rooms(int hotel)
 		{
 
-			var Rooms = _context.rooms.Where(h => h.IdHotel.Equals(hotel));
-			return View(Rooms);
-		}
+			var rooms = _context.rooms.Where(h => h.IdHotel.Equals(hotel));
+			return View(rooms);
+		}*/
 		public IActionResult RoomDetails()
 		{
 
@@ -142,6 +144,45 @@ namespace Hotels.Controllers
 			return View(roomDetails);
 
 		}
+		public IActionResult RoomsEdit(int id)
+		{
+			var RoomsEdit = _context.rooms.SingleOrDefault(x => x.Id == id);
+			var HotelName = _context.hotel.SingleOrDefault(x => x.Id == RoomsEdit.IdHotel);
+			ViewBag.HotelName = HotelName;
+			var hotel = _context.hotel.ToList();
+			ViewBag.hotel = hotel;
+
+			return View(RoomsEdit);
+		}
+		public IActionResult RoomsUpdate(Rooms rooms)
+		{
+			_context.rooms.Update(rooms);
+			_context.SaveChanges();
+			TempData["Edit"] = "ok";
+			return RedirectToAction("Rooms");
+
+		}
+		public IActionResult RoomDetailsEdit(int id)
+		{
+			var RoomDetailsEdit = _context.roomDetails.SingleOrDefault(x => x.Id == id);
+			var hotelName = _context.hotel.SingleOrDefault(x => x.Id == RoomDetailsEdit.IdHotel);
+			ViewBag.HotelName = hotelName;
+			var roomType = _context.rooms.SingleOrDefault(x => x.Id == RoomDetailsEdit.IdRoom);
+			ViewBag.RoomType = roomType;
+			var hotel = _context.hotel.ToList();
+			var rooms = _context.rooms.ToList();
+			ViewBag.hotel = hotel;
+			ViewBag.rooms = rooms;
+			return View(RoomDetailsEdit);
+		}
+		public IActionResult RoomDetailesUpdate(RoomDetails roomDetails)
+		{
+			_context.roomDetails.Update(roomDetails);
+			_context.SaveChanges();
+			TempData["Edit"] = "ok";
+			return RedirectToAction("RoomDetails");
+
+		}
 		public IActionResult CreateNewRoomDetails(RoomDetails roomDetails)
 		{
 			
@@ -149,13 +190,13 @@ namespace Hotels.Controllers
 			_context.SaveChanges();
 			return RedirectToAction("RoomDetails");
 		}
-		public IActionResult CreateNewRooms(Rooms rooms)
-		{
-			_context.rooms.Add(rooms);
-			_context.SaveChanges();
-			return RedirectToAction("Rooms");
-		}
-		public IActionResult CreateNewHotel(Hotel hotels)
+        public IActionResult CreateNewRooms(Rooms rooms)
+        {
+            _context.rooms.Add(rooms);
+            _context.SaveChanges();
+            return RedirectToAction("Rooms");
+        }
+        public IActionResult CreateNewHotel(Hotel hotels)
         {
 			if (ModelState.IsValid)
 			{

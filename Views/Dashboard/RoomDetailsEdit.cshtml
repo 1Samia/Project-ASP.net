@@ -1,0 +1,94 @@
+﻿@model RoomDetails
+@{
+	var hotelName = ViewBag.HotelName;
+	var roomType = ViewBag.RoomType;
+}
+<div class="container" dir="rtl">
+	<div class="alert alert-success text-center "><h1>تعديل تفاصيل الغرفة </h1></div>
+	<form asp-action="RoomDetailesUpdate" method="post">
+		<div class="row">
+			<div class="col">
+				<label for="Name" class="p-2">اختر الفندق</label>
+				<select class="form-control form-control-sm" name="IdHotel">
+					<option value="@hotelName.Id">@hotelName.Name</option>
+					@if (ViewBag.hotel != null && ViewBag.hotel is IEnumerable<Hotel>)
+					{
+						@foreach (var item in ViewBag.hotel as IEnumerable<Hotel>)
+						{
+							<option value="@item.Id">@item.Name</option>
+						}
+					}
+				</select>
+
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<label for="Name" class="p-2"> اختر الغرفة </label>
+				<select class="form-control form-control-sm" name="IdRoom">
+					<option value="@roomType.Id">@roomType.Type</option>
+					@if (ViewBag.rooms != null && ViewBag.rooms is IEnumerable<Rooms>)
+					{
+						@foreach (var item in ViewBag.rooms as IEnumerable<Rooms>)
+						{
+							<option value="@item.Id">@item.Type</option>
+						}
+					}
+				</select>
+
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<label for="Address" class="p-2">  مزايا الغرفة</label>
+				<input type="text" id="City" name="Futures" class="form-control form-control-sm" required />
+
+
+			</div>
+
+
+
+
+			<div class="col-sm-6">
+				<label for="Address" class="p-2">  الطعام</label>
+				<input type="text" id="City" name="Food" class="form-control form-control-sm" />
+
+
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col">
+				<label for="Image" class="p-2"> الصورة </label>
+				<input type="text" id="Image" name="Image1" class="form-control form-control-sm" required />
+
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="Image" class="p-2"> الصورة </label>
+					<input type="text" id="Image" name="Image2" class="form-control form-control-sm" required />
+
+				</div>
+				<div class="row">
+					<div class="col">
+						<label for="Image" class="p-2"> الصورة </label>
+						<input type="text" id="Image" name="Image3" class="form-control form-control-sm" required />
+
+					</div>
+				</div>
+
+				<div class="row mt-3">
+					<div class="col text-center">
+
+						<button class="btn btn-success" type="submit">حفظ</button>
+
+
+					</div>
+
+				</div>
+	</form>
+
+</div>
